@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public bool isOnGround = true;
     public bool doubleJumpUsed = false;
     public float doubleJumpForce;
+    public bool doubleSpeed = false;
 
     public bool gameOver = false;
 
@@ -59,6 +60,17 @@ public class PlayerController : MonoBehaviour
             playerAudio.PlayOneShot(jumpSound, 1.0f);
         }
         
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            doubleSpeed = true;
+            playerAnim.SetFloat("Speed_Multiplier", 2.0f);
+        }
+
+        else if(doubleSpeed)
+        {
+            doubleSpeed = false;
+            playerAnim.SetFloat("Speed_Multiplier", 1.0f);
+        }
     }
     
     private void OnCollisionEnter(Collision  collision)
